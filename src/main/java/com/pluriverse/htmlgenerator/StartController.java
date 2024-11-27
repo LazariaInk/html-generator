@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
+import javafx.scene.control.Button;
+
 
 public class StartController {
 
@@ -19,6 +21,8 @@ public class StartController {
     private Text htmlGeneratorByLazariaInkText;
     @FXML
     private Text wellComeText;
+    @FXML
+    private Text mailText;
 
     @FXML
     public void initialize() {
@@ -41,7 +45,7 @@ public class StartController {
         String textColor = isDarkMode ? Colors.DARK_TEXT_COLOR : Colors.LIGHT_TEXT_COLOR;
         String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
         wellComeText.setStyle("-fx-fill:" + textColor + ";");
-        htmlGeneratorByLazariaInkText.setStyle("-fx-fill:" + textColor + ";");
+        mailText.setStyle("-fx-fill:" + textColor + ";");
         htmlGeneratorByLazariaInkText.setStyle("-fx-fill:" + textColor + ";");
         startWindow.setStyle("-fx-background-color:" +  bgColor + ";");
     }

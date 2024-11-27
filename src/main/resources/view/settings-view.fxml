@@ -11,98 +11,84 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="settingsWindow" alignment="CENTER" prefHeight="506.0" prefWidth="685.0" spacing="20.0"
-      xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.pluriverse.htmlgenerator.SettingsController">
+<VBox fx:id="settingsWindow" alignment="CENTER" prefHeight="506.0" prefWidth="685.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pluriverse.htmlgenerator.SettingsController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
     <VBox prefHeight="523.0" prefWidth="645.0">
         <HBox prefHeight="85.0" prefWidth="645.0">
-            <Button prefHeight="40.0" prefWidth="57.0"
-                    style="-fx-border-color: transparent; -fx-background-color: transparent;" textFill="WHITE"
-                    onAction="#handleStartController">
+            <Button onAction="#handleStartController" prefHeight="40.0" prefWidth="57.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" textFill="WHITE">
                 <graphic>
                     <ImageView fitHeight="30.0" fitWidth="43.0" preserveRatio="true">
-                        <Image url="@images/back-button.png"/>
+                        <Image url="@images/back-button.png" />
                     </ImageView>
                 </graphic>
             </Button>
-            <Text fx:id="settingsText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings"
-                  wrappingWidth="243.482421875">
+            <Text fx:id="settingsText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="243.482421875">
                 <font>
-                    <Font name="OpenSymbol" size="40.0"/>
+                    <Font name="OpenSymbol" size="40.0" />
                 </font>
             </Text>
         </HBox>
         <HBox prefHeight="312.0" prefWidth="645.0">
             <VBox prefHeight="312.0" prefWidth="657.0">
                 <HBox prefHeight="50.0" prefWidth="645.0">
-                    <Pane prefHeight="41.0" prefWidth="25.0"/>
-                    <Text fx:id="darkModeText" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Dark mode"
-                          wrappingWidth="113.75390625">
+                    <Pane prefHeight="41.0" prefWidth="25.0" />
+                    <Text fx:id="darkModeText" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Dark mode" wrappingWidth="113.75390625">
                         <font>
-                            <Font size="20.0"/>
+                            <Font size="20.0" />
                         </font>
                     </Text>
                     <CheckBox fx:id="darkModeCheckBox" mnemonicParsing="false" onAction="#handleDarkModeChange">
                         <font>
-                            <Font size="20.0"/>
+                            <Font size="20.0" />
                         </font>
                     </CheckBox>
 
                 </HBox>
                 <HBox prefHeight="50.0" prefWidth="645.0">
-                    <Pane prefHeight="41.0" prefWidth="25.0"/>
-                    <Text fx:id="stylesForTextText" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0"
-                          text="Styles for text">
+                    <Pane prefHeight="41.0" prefWidth="25.0" />
+                    <Text fx:id="stylesForTextText" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Styles for text">
                         <font>
-                            <Font size="20.0"/>
+                            <Font size="20.0" />
                         </font>
                     </Text>
                 </HBox>
                 <HBox prefHeight="50.0" prefWidth="645.0">
-                    <Pane prefHeight="48.0" prefWidth="25.0"/>
-                    <Text fx:id="stylesForImageText" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0"
-                          text="Styles for image">
+                    <Pane prefHeight="48.0" prefWidth="25.0" />
+                    <Text fx:id="stylesForImageText" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Styles for image">
                         <font>
-                            <Font size="20.0"/>
+                            <Font size="20.0" />
                         </font>
                     </Text>
                 </HBox>
                 <HBox prefHeight="50.0" prefWidth="200.0">
-                    <Pane prefHeight="50.0" prefWidth="25.0"/>
-                    <Text fx:id="stylesForTitleText" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0"
-                          text="Styles for title">
+                    <Pane prefHeight="50.0" prefWidth="25.0" />
+                    <Text fx:id="stylesForTitleText" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Styles for title">
                         <font>
-                            <Font size="20.0"/>
+                            <Font size="20.0" />
                         </font>
                     </Text>
                 </HBox>
                 <HBox prefHeight="50.0" prefWidth="200.0">
-                    <Pane prefHeight="200.0" prefWidth="25.0"/>
-                    <Text fx:id="stylesForSubTitle" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0"
-                          text="Styles for subtitle">
+                    <Pane prefHeight="200.0" prefWidth="25.0" />
+                    <Text fx:id="stylesForSubTitle" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Styles for subtitle">
                         <font>
-                            <Font size="20.0"/>
+                            <Font size="20.0" />
                         </font>
                     </Text>
                 </HBox>
             </VBox>
         </HBox>
         <HBox prefHeight="68.0" prefWidth="645.0">
-            <HBox prefHeight="68.0" prefWidth="196.0"/>
+            <HBox prefHeight="68.0" prefWidth="196.0" />
             <VBox prefHeight="90.0" prefWidth="277.0">
-                <HBox prefHeight="43.0" prefWidth="267.0">
-                    <Text fx:id="htmlGeneratorByLazariaInkText" strokeType="OUTSIDE" strokeWidth="0.0"
-                          text="                   Html generator by @lazariaInk"/>
+                <HBox prefHeight="27.0" prefWidth="267.0">
+                    <Text fx:id="htmlGeneratorByLazariaInkText" strokeType="OUTSIDE" strokeWidth="0.0" text="                   Html generator by @lazariaInk" />
                 </HBox>
-                <HBox prefHeight="56.0" prefWidth="277.0">
-                    <HBox prefHeight="48.0" prefWidth="113.0"/>
-                    <Button mnemonicParsing="false" text="Donate"/>
-                </HBox>
+                <Text fx:id="mailText" strokeType="OUTSIDE" strokeWidth="0.0" text="                       lorienlored@gmail.com" wrappingWidth="200.13671875" />
             </VBox>
-            <Pane prefHeight="68.0" prefWidth="202.0"/>
+            <Pane prefHeight="68.0" prefWidth="202.0" />
         </HBox>
     </VBox>
 </VBox>

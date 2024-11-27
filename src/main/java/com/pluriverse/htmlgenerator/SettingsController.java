@@ -28,6 +28,8 @@ public class SettingsController {
     private Text stylesForSubTitle;
     @FXML
     private Text htmlGeneratorByLazariaInkText;
+    @FXML
+    private Text mailText;
 
 
     @FXML
@@ -73,6 +75,7 @@ public class SettingsController {
         stylesForTitleText.setStyle("-fx-fill:" + textColor + ";");
         stylesForSubTitle.setStyle("-fx-fill:" + textColor + ";");
         htmlGeneratorByLazariaInkText.setStyle("-fx-fill:" + textColor + ";");
+        mailText.setStyle("-fx-fill:" + textColor + ";");
         settingsWindow.setStyle("-fx-background-color:" +  bgColor + ";");
     }
 
