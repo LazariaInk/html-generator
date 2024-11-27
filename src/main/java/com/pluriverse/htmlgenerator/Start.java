@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Start extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("start-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("/view/start-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 480);
         stage.setTitle("Html generator!");
         stage.setScene(scene);
