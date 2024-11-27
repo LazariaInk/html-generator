@@ -76,7 +76,7 @@ public class SettingsController {
         stylesForSubTitle.setStyle("-fx-fill:" + textColor + ";");
         htmlGeneratorByLazariaInkText.setStyle("-fx-fill:" + textColor + ";");
         mailText.setStyle("-fx-fill:" + textColor + ";");
-        settingsWindow.setStyle("-fx-background-color:" +  bgColor + ";");
+        settingsWindow.setStyle("-fx-background-color:" + bgColor + ";");
     }
 
     public void initDarkModeCheckBox() {

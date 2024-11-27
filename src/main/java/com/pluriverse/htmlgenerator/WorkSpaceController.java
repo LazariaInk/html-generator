@@ -3,11 +3,18 @@ package com.pluriverse.htmlgenerator;
 import com.pluriverse.htmlgenerator.util.Colors;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,16 +32,34 @@ public class WorkSpaceController {
     @FXML
     public void initialize() {
         Platform.runLater(() -> {
-            // Apply styles directly to the ScrollPane
             scrollPane.setStyle("-fx-background-color: transparent;");
-
-            // Ensure the viewport inside the ScrollPane is transparent
             Node viewport = scrollPane.lookup(".viewport");
             if (viewport != null) {
                 viewport.setStyle("-fx-background-color: transparent;");
             }
         });
         colorElements();
+    }
+
+    @FXML
+    public void handleStartController(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/start-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setWidth(685.0);
+        stage.setHeight(506.0);
+
+        // Centrează scena pe ecran
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        stage.setX((bounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((bounds.getHeight() - stage.getHeight()) / 2);
+
+        stage.setTitle("Workspace");
+        stage.show();
     }
 
     public void addParagraph() {
@@ -310,19 +335,15 @@ public class WorkSpaceController {
         String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
         String inputBgColor = isDarkMode ? Colors.DARK_INPUT_BG_COLOR : Colors.LIGHT_INPUT_BG_COLOR;
 
-        // Set the background color for the main workspace
         workSpaceWindow.setStyle("-fx-background-color:" + bgColor + ";");
 
-        // Ensure the ScrollPane itself and its content area have the correct background
         scrollPane.setStyle("-fx-background-color:" + bgColor + ";");
         if (scrollPane.getContent() != null) {
             scrollPane.getContent().setStyle("-fx-background-color:" + bgColor + ";");
         }
 
-        // Update the background color of the content area
         contentArea.setStyle("-fx-background-color:" + bgColor + ";");
 
-        // Update styles for all child elements in the content area
         for (Node node : contentArea.getChildren()) {
             if (node instanceof HBox) {
                 HBox elementBox = (HBox) node;
@@ -346,7 +367,4 @@ public class WorkSpaceController {
             }
         }
     }
-
-
-
 }

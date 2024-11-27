@@ -3,14 +3,16 @@ package com.pluriverse.htmlgenerator;
 import com.pluriverse.htmlgenerator.util.Colors;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+
 import java.io.IOException;
-import javafx.scene.control.Button;
 
 
 public class StartController {
@@ -45,11 +47,22 @@ public class StartController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/workspace-view.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
+
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);
-        stage.setTitle("Settings");
+
+        stage.setWidth(1200);
+        stage.setHeight(820);
+
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        stage.setX((bounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((bounds.getHeight() - stage.getHeight()) / 2);
+
+        stage.setTitle("Workspace");
         stage.show();
     }
+
 
     public void colorElements() {
         boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
@@ -58,6 +71,6 @@ public class StartController {
         wellComeText.setStyle("-fx-fill:" + textColor + ";");
         mailText.setStyle("-fx-fill:" + textColor + ";");
         htmlGeneratorByLazariaInkText.setStyle("-fx-fill:" + textColor + ";");
-        startWindow.setStyle("-fx-background-color:" +  bgColor + ";");
+        startWindow.setStyle("-fx-background-color:" + bgColor + ";");
     }
 }
