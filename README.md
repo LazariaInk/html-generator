@@ -62,7 +62,7 @@ _Preview your responsive design before exporting._
 
 Here's a sample of the generated HTML content:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`htmlКопировать код                  Responsive README      </div><div class="slate-code_line">        body {</div><div class="slate-code_line">            font-family: Arial, sans-serif;</div><div class="slate-code_line">            line-height: 1.6;</div><div class="slate-code_line">            margin: 0;</div><div class="slate-code_line">            padding: 20px;</div><div class="slate-code_line">            background-color: #f4f4f9;</div><div class="slate-code_line">        }</div><div class="slate-code_line">        h1, h2, h3 {</div><div class="slate-code_line">            color: #333;</div><div class="slate-code_line">        }</div><div class="slate-code_line">        pre {</div><div class="slate-code_line">            background: #272822;</div><div class="slate-code_line">            color: #f8f8f2;</div><div class="slate-code_line">            padding: 10px;</div><div class="slate-code_line">            border-radius: 5px;</div><div class="slate-code_line">        }</div><div class="slate-code_line">            Welcome to HTML Generator =========================        This is an example of the beautifully styled HTML output created by our application.          // Example Code          System.out.println("Hello, World!");`    
+test 
 
 🧩 Requirements
 ---------------
