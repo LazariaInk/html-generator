@@ -1,4 +1,4 @@
-package org.example.demo;
+package com.pluriverse.htmlgenerator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
