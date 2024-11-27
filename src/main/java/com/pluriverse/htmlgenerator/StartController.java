@@ -1,24 +1,28 @@
 package com.pluriverse.htmlgenerator;
 
-import com.pluriverse.htmlgenerator.Settings;
+import com.pluriverse.htmlgenerator.util.Colors;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class StartController {
 
     @FXML
-    private VBox rootVBox;
+    private VBox startWindow;
+    @FXML
+    private Text htmlGeneratorByLazariaInkText;
+    @FXML
+    private Text wellComeText;
 
     @FXML
     public void initialize() {
+        colorElements();
     }
 
     @FXML
@@ -30,5 +34,15 @@ public class StartController {
         stage.setScene(scene);
         stage.setTitle("Settings");
         stage.show();
+    }
+
+    public void colorElements() {
+        boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
+        String textColor = isDarkMode ? Colors.DARK_TEXT_COLOR : Colors.LIGHT_TEXT_COLOR;
+        String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
+        wellComeText.setStyle("-fx-fill:" + textColor + ";");
+        htmlGeneratorByLazariaInkText.setStyle("-fx-fill:" + textColor + ";");
+        htmlGeneratorByLazariaInkText.setStyle("-fx-fill:" + textColor + ";");
+        startWindow.setStyle("-fx-background-color:" +  bgColor + ";");
     }
 }
