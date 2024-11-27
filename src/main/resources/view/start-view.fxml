@@ -30,7 +30,7 @@
                 <HBox prefHeight="78.0" prefWidth="645.0"/>
                 <HBox prefHeight="156.0" prefWidth="645.0">
                     <Pane prefHeight="156.0" prefWidth="137.0"/>
-                    <Button prefHeight="130.0" prefWidth="130.0">
+                    <Button  onAction="#handleWorkspaceButton" prefHeight="130.0" prefWidth="130.0">
                         <graphic>
                             <ImageView fitHeight="50.0" fitWidth="50.0" preserveRatio="true">
                                 <Image url="@images/add-file.png"/>

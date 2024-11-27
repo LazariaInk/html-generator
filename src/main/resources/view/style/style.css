@@ -20,3 +20,13 @@
 .button:pressed {
     -fx-background-color: linear-gradient(to bottom, #2a5298, #1e3e6e);
 }
+
+/* Set the viewport background to transparent */
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Set the scroll pane background to transparent */
+.scroll-pane {
+    -fx-background-color: transparent;
+}

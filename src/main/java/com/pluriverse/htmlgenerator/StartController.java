@@ -40,6 +40,17 @@ public class StartController {
         stage.show();
     }
 
+    @FXML
+    public void handleWorkspaceButton(javafx.event.ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/workspace-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Settings");
+        stage.show();
+    }
+
     public void colorElements() {
         boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
         String textColor = isDarkMode ? Colors.DARK_TEXT_COLOR : Colors.LIGHT_TEXT_COLOR;
