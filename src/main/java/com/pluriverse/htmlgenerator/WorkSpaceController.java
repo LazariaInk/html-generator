@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -14,6 +16,10 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
+
+import java.io.File;
 
 public class WorkSpaceController {
 
@@ -136,10 +142,12 @@ public class WorkSpaceController {
 
         if (newElement != null) {
             HBox wrappedElement = wrapWithDeleteButton(newElement);
+            addDraggableBehavior(wrappedElement);
             int insertIndex = calculateInsertIndex(dropY);
             workArea.getChildren().add(insertIndex, wrappedElement);
         }
     }
+
 
     private HBox wrapWithDeleteButton(Node element) {
         HBox container = new HBox(10);
@@ -147,8 +155,10 @@ public class WorkSpaceController {
         deleteButton.setStyle("-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold;");
         deleteButton.setOnAction(event -> workArea.getChildren().remove(container));
         container.getChildren().addAll(element, deleteButton);
+        addDraggableBehavior(container);
         return container;
     }
+
 
     private Node createTitle() {
         TextField titleField = new TextField();
@@ -175,7 +185,23 @@ public class WorkSpaceController {
     private Node createImage() {
         Button imagePlaceholder = new Button("Select Image");
         imagePlaceholder.setOnAction(event -> {
-            System.out.println("Image selection logic here.");
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select Image");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+            );
+
+            File selectedFile = fileChooser.showOpenDialog(scrollPane.getScene().getWindow());
+            if (selectedFile != null) {
+                ImageView imageView = new ImageView(new Image(selectedFile.toURI().toString()));
+                imageView.setFitWidth(200);
+                imageView.setPreserveRatio(true);
+                imageView.setSmooth(true);
+
+                int index = workArea.getChildren().indexOf(imagePlaceholder.getParent());
+                HBox wrappedElement = wrapWithDeleteButton(imageView);
+                workArea.getChildren().set(index, wrappedElement);
+            }
         });
         imagePlaceholder.setStyle("-fx-border-color: lightblue; -fx-padding: 5;");
         return imagePlaceholder;
@@ -203,6 +229,36 @@ public class WorkSpaceController {
         codeField.setStyle("-fx-font-family: monospace; -fx-border-color: lightblue; -fx-padding: 5;");
         return codeField;
     }
+
+    private void addDraggableBehavior(Node element) {
+        element.setOnDragDetected(event -> {
+            Dragboard db = element.startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent content = new ClipboardContent();
+            content.putString("");
+            db.setContent(content);
+            event.consume();
+        });
+
+        element.setOnDragOver(event -> {
+            if (event.getGestureSource() != element && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+
+        element.setOnDragDropped(event -> {
+            Node draggedNode = (Node) event.getGestureSource();
+            if (workArea.getChildren().contains(draggedNode)) {
+                workArea.getChildren().remove(draggedNode);
+
+                int insertIndex = calculateInsertIndex(event.getY());
+                workArea.getChildren().add(insertIndex, draggedNode);
+            }
+            event.setDropCompleted(true);
+            event.consume();
+        });
+    }
+
 
 
 }
