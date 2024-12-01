@@ -3,10 +3,13 @@ package com.pluriverse.htmlgenerator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 
 public class WorkSpaceController {
@@ -57,7 +60,8 @@ public class WorkSpaceController {
         workArea.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             if (db.hasString()) {
-                addElementToWorkArea(db.getString(), event.getX(), event.getY());
+                //addElementToWorkArea(db.getString(), event.getX(), event.getY());
+                addBlockToWorkArea(event.getX(), event.getY());
                 event.setDropCompleted(true);
             } else {
                 event.setDropCompleted(false);
@@ -78,11 +82,26 @@ public class WorkSpaceController {
 
     private void addElementToWorkArea(String elementType, double x, double y) {
         System.out.println("asta este elementType " + elementType);
-        Button newElement = new Button(elementType);
+        TextArea newElement = new TextArea();
+        newElement.setPrefSize(700,150);
         newElement.setLayoutX(x);
         newElement.setLayoutY(y);
-        newElement.setPrefSize(100, 30);
         newElement.setStyle("-fx-background-color: lightblue; -fx-border-color: darkblue;");
         workArea.getChildren().add(newElement);
+    }
+
+    private void addBlockToWorkArea(double x, double y) {
+        TextArea button = new TextArea();
+        button.setOnMouseClicked(event -> {
+            System.out.println(button.getText());
+        });
+        button.setPrefSize(150, 150);
+        HBox hBox = new HBox();
+        hBox.getChildren().add(button);
+        hBox.setPrefSize(700, 150);
+        hBox.setLayoutX(x);
+        hBox.setLayoutY(y);
+        hBox.setStyle("-fx-background-color: black;");
+        workArea.getChildren().add(hBox);
     }
 }
