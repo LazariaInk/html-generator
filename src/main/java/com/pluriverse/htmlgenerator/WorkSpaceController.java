@@ -12,12 +12,8 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
-import javafx.stage.Window;
 
 import java.io.File;
 
@@ -162,15 +158,20 @@ public class WorkSpaceController {
 
     private Node createTitle() {
         TextField titleField = new TextField();
+        titleField.setPrefWidth(800);
         titleField.setPromptText("Enter title...");
-        titleField.setStyle("-fx-border-color: lightblue; -fx-padding: 5;");
+
+        titleField.setStyle("-fx-border-color: lightblue; -fx-padding: 5; -fx-font-size: 20px; -fx-font-weight: bold;");
+
         return titleField;
     }
 
     private Node createSubTitle() {
         TextField subTitleField = new TextField();
+        subTitleField.setPrefWidth(800);
         subTitleField.setPromptText("Enter subtitle...");
         subTitleField.setStyle("-fx-border-color: lightblue; -fx-padding: 5;");
+        subTitleField.setStyle("-fx-border-color: lightblue; -fx-padding: 5; -fx-font-size: 15px; -fx-font-weight: bold;");
         return subTitleField;
     }
 
@@ -258,7 +259,4 @@ public class WorkSpaceController {
             event.consume();
         });
     }
-
-
-
 }
