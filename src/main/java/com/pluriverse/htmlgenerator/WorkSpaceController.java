@@ -9,7 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class WorkSpaceController {
 
@@ -36,6 +39,8 @@ public class WorkSpaceController {
 
     private VBox workArea;
 
+    private Rectangle hintBar; // Blue bar for hinting the drop position
+
     @FXML
     public void initialize() {
         workArea = new VBox(15);
@@ -52,6 +57,11 @@ public class WorkSpaceController {
         configureDragAndDrop(codeButton, "Code");
 
         configureWorkAreaForReordering();
+
+        // Initialize the blue bar for visual hinting
+        hintBar = new Rectangle(900, 3, Color.BLUE); // A thin blue rectangle
+        hintBar.setVisible(false); // Hidden by default
+        workArea.getChildren().add(hintBar); // Add it to the workArea (at the end for layering)
     }
 
     private void configureDragAndDrop(Button button, String elementType) {
@@ -68,6 +78,7 @@ public class WorkSpaceController {
         workArea.setOnDragOver(event -> {
             if (event.getGestureSource() != workArea && event.getDragboard().hasString()) {
                 event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                updateHintBar(event.getY());
             }
             event.consume();
         });
@@ -76,7 +87,6 @@ public class WorkSpaceController {
             Dragboard db = event.getDragboard();
             if (db.hasString()) {
                 String elementType = db.getString();
-
                 Node draggedNode = (Node) event.getGestureSource();
 
                 if (workArea.getChildren().contains(draggedNode)) {
@@ -87,18 +97,22 @@ public class WorkSpaceController {
                     addElementToWorkArea(elementType, event.getY());
                 }
 
+                hideHintBar();
                 event.setDropCompleted(true);
             } else {
                 event.setDropCompleted(false);
             }
             event.consume();
         });
+
+        workArea.setOnDragExited(event -> hideHintBar());
     }
 
     private int calculateInsertIndex(double dropY) {
         double cumulativeHeight = 0;
         for (int i = 0; i < workArea.getChildren().size(); i++) {
             Node child = workArea.getChildren().get(i);
+            if (child == hintBar) continue;
             cumulativeHeight += child.getBoundsInParent().getHeight() + workArea.getSpacing();
             if (dropY < cumulativeHeight) {
                 return i;
@@ -205,5 +219,20 @@ public class WorkSpaceController {
         codeField.setPrefHeight(100);
         codeField.setStyle("-fx-font-family: monospace; -fx-border-color: lightblue; -fx-padding: 5;");
         return codeField;
+    }
+
+    private void updateHintBar(double mouseY) {
+        hintBar.setVisible(true);
+        int insertIndex = calculateInsertIndex(mouseY);
+        if (insertIndex < workArea.getChildren().size()) {
+            Node targetNode = workArea.getChildren().get(insertIndex);
+            hintBar.setLayoutY(targetNode.getBoundsInParent().getMinY() - 2);
+        } else {
+            hintBar.setLayoutY(workArea.getHeight() - 3);
+        }
+    }
+
+    private void hideHintBar() {
+        hintBar.setVisible(false);
     }
 }

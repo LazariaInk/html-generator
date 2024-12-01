@@ -7,16 +7,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pluriverse.htmlgenerator.WorkSpaceController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.2" fx:controller="com.pluriverse.htmlgenerator.WorkSpaceController">
 
     <HBox prefHeight="775.0" prefWidth="1091.0">
-        <ScrollPane fx:id="scrollPane" prefHeight="775.0" prefWidth="982.0"/>
+        <ScrollPane fx:id="scrollPane" prefHeight="775.0" prefWidth="982.0" />
         <VBox prefHeight="775.0" prefWidth="132.0">
          <Pane prefHeight="15.0" prefWidth="132.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
             <Pane prefHeight="100.0" prefWidth="20.0" />
-                <Button fx:id="titleButton" mnemonicParsing="false" prefWidth="90.0"  style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
+                <Button fx:id="titleButton" mnemonicParsing="false" prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
                     <graphic>
                         <ImageView fitHeight="104.0" fitWidth="90.0" preserveRatio="true">
                             <Image url="@images/title-button.png" />
@@ -27,7 +28,7 @@
          <Pane prefHeight="20.0" prefWidth="116.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                 <Pane prefHeight="100.0" prefWidth="20.0" />
-                <Button fx:id="subTitleButton" mnemonicParsing="false" prefWidth="90.0"  style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
+                <Button fx:id="subTitleButton" mnemonicParsing="false" prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
                     <graphic>
                         <ImageView fitHeight="100.0" fitWidth="90.0" preserveRatio="true">
                             <Image url="@images/subtitle-button.png" />
@@ -38,7 +39,7 @@
             <Pane prefHeight="20.0" prefWidth="116.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                 <Pane prefHeight="100.0" prefWidth="20.0" />
-                <Button fx:id="paragraphButton" mnemonicParsing="false" prefWidth="90.0"  style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
+                <Button fx:id="paragraphButton" mnemonicParsing="false" prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
                     <graphic>
                         <ImageView fitHeight="100.0" fitWidth="90.0" preserveRatio="true">
                             <Image url="@images/paragraph-button.png" />
@@ -49,7 +50,7 @@
             <Pane prefHeight="20.0" prefWidth="116.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                 <Pane prefHeight="100.0" prefWidth="20.0" />
-                <Button fx:id="imageButton" mnemonicParsing="false" prefWidth="90.0"  style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
+                <Button fx:id="imageButton" mnemonicParsing="false" prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
                     <graphic>
                         <ImageView fitHeight="100.0" fitWidth="90.0" preserveRatio="true">
                             <Image url="@images/image-button.png" />
@@ -60,7 +61,7 @@
             <Pane prefHeight="20.0" prefWidth="116.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                 <Pane prefHeight="100.0" prefWidth="20.0" />
-                <Button fx:id="enumerationButton" mnemonicParsing="false" prefWidth="90.0"   style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
+                <Button fx:id="enumerationButton" mnemonicParsing="false" prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
                     <graphic>
                         <ImageView fitHeight="100.0" fitWidth="90.0" preserveRatio="true">
                             <Image url="@images/enumeration-button.png" />
@@ -71,7 +72,7 @@
             <Pane prefHeight="20.0" prefWidth="116.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                 <Pane prefHeight="100.0" prefWidth="20.0" />
-                <Button fx:id="codeButton" mnemonicParsing="false" prefWidth="90.0"  style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
+                <Button fx:id="codeButton" mnemonicParsing="false" prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: lightblue; -fx-border-width: 1;">
                     <graphic>
                         <ImageView fitHeight="100.0" fitWidth="90.0" preserveRatio="true">
                             <Image url="@images/code-button.png" />
@@ -81,5 +82,29 @@
             </HBox>
         </VBox>
     </HBox>
-    <HBox prefHeight="45.0" prefWidth="1091.0" />
+    <HBox prefHeight="89.0" prefWidth="1091.0">
+      <children>
+         <Pane prefHeight="73.0" prefWidth="35.0" />
+         <VBox prefHeight="90.0" prefWidth="202.0">
+            <children>
+               <Pane prefHeight="22.0" prefWidth="166.0" />
+               <HBox prefHeight="42.0" prefWidth="184.0">
+                  <children>
+                     <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="back">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Button>
+                     <Pane prefHeight="42.0" prefWidth="25.0" />
+                     <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="export">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Button>
+                  </children>
+               </HBox>
+               <Pane prefHeight="20.0" prefWidth="202.0" />
+            </children>
+         </VBox>
+      </children></HBox>
 </VBox>
