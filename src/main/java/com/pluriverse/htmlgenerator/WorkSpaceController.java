@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -146,25 +147,19 @@ public class WorkSpaceController {
         }
 
         if (newElement != null) {
-            addDraggableBehavior(newElement);
+            HBox wrappedElement = wrapWithDeleteButton(newElement);
             int insertIndex = calculateInsertIndex(dropY);
-            workArea.getChildren().add(insertIndex, newElement);
+            workArea.getChildren().add(insertIndex, wrappedElement);
         }
     }
 
-    private void addDraggableBehavior(Node element) {
-        element.setOnDragDetected(event -> {
-            Dragboard db = element.startDragAndDrop(TransferMode.MOVE);
-            ClipboardContent content = new ClipboardContent();
-            content.putString("");
-            db.setContent(content);
-            event.consume();
-        });
-
-        element.setOnDragOver(event -> {
-            event.acceptTransferModes(TransferMode.MOVE);
-            event.consume();
-        });
+    private HBox wrapWithDeleteButton(Node element) {
+        HBox container = new HBox(10);
+        Button deleteButton = new Button("X");
+        deleteButton.setStyle("-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold;");
+        deleteButton.setOnAction(event -> workArea.getChildren().remove(container));
+        container.getChildren().addAll(element, deleteButton);
+        return container;
     }
 
     private Node createTitle() {
