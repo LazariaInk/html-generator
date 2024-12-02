@@ -1,7 +1,9 @@
 package com.pluriverse.htmlgenerator;
 
+import com.pluriverse.htmlgenerator.util.Colors;
 import com.pluriverse.htmlgenerator.util.I18nUtils;
 import com.pluriverse.htmlgenerator.util.Styles;
+import com.sun.javafx.scene.layout.region.SliceSequenceConverter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -43,6 +45,8 @@ public class WorkSpaceController {
     private Button backButton;
     @FXML
     private Button exportButton;
+    @FXML
+    private VBox workAreaContainer;
 
     private VBox workArea;
 
@@ -53,14 +57,35 @@ public class WorkSpaceController {
         workArea.setPrefHeight(1500);
         workArea.setStyle(Styles.WORK_AREA);
         scrollPane.setContent(workArea);
+
         configureDragAndDrop(titleButton, "Title");
         configureDragAndDrop(subTitleButton, "SubTitle");
         configureDragAndDrop(paragraphButton, "Paragraph");
         configureDragAndDrop(imageButton, "Image");
         configureDragAndDrop(enumerationButton, "Enumeration");
         configureDragAndDrop(codeButton, "Code");
+
         configureWorkAreaForReordering();
         reloadTexts();
+        colorElements();
+    }
+
+    private void colorElements() {
+        boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
+        String textColor = isDarkMode ? Colors.DARK_TEXT_COLOR : Colors.LIGHT_TEXT_COLOR;
+        String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
+
+        titleButton.setStyle("-fx-text-fill: " + textColor + ";");
+        subTitleButton.setStyle("-fx-text-fill: " + textColor + ";");
+        paragraphButton.setStyle("-fx-text-fill: " + textColor + ";");
+        imageButton.setStyle("-fx-text-fill: " + textColor + ";");
+        enumerationButton.setStyle("-fx-text-fill: " + textColor + ";");
+        codeButton.setStyle("-fx-text-fill: " + textColor + ";");
+        backButton.setStyle("-fx-text-fill: " + textColor + ";");
+        exportButton.setStyle("-fx-text-fill: " + textColor + ";");
+        workAreaContainer.setStyle("-fx-background-color: " + bgColor + ";");
+        scrollPane.setStyle("-fx-background: " + bgColor + ";");
+        workArea.setStyle("-fx-background: " + bgColor + ";");
     }
 
     private void reloadTexts() {
@@ -168,29 +193,52 @@ public class WorkSpaceController {
     }
 
     private Node createTitle() {
+        boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
+        String textColor = isDarkMode ? Colors.DARK_TEXT_COLOR : Colors.LIGHT_TEXT_COLOR;
+        String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
+
         TextField titleField = new TextField();
+        titleField.setStyle("-fx-background-color: " + bgColor + "; -fx-text-fill: " + textColor + ";");
         titleField.setPrefWidth(800);
         titleField.setPromptText(I18nUtils.getText("enter_title"));
-        titleField.setStyle(Styles.TITLE_FIELD);
+
+        titleField.setStyle(titleField.getStyle() + Styles.TITLE_FIELD);
+
         return titleField;
     }
 
     private Node createSubTitle() {
+        boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
+        String textColor = isDarkMode ? Colors.DARK_TEXT_COLOR : Colors.LIGHT_TEXT_COLOR;
+        String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
+
         TextField subTitleField = new TextField();
+        String dynamicStyles = "-fx-background-color: " + bgColor + "; -fx-text-fill: " + textColor + ";";
+        subTitleField.setStyle(dynamicStyles + Styles.SUB_TITLE_FIELD);
+
         subTitleField.setPrefWidth(800);
         subTitleField.setPromptText(I18nUtils.getText("enter_subtitle"));
-        subTitleField.setStyle(Styles.SUB_TITLE_FIELD);
+
         return subTitleField;
     }
 
     private Node createParagraph() {
+        boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
+        String textColor = isDarkMode ? Colors.DARK_TEXT_COLOR : Colors.LIGHT_TEXT_COLOR;
+        String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
+
         TextArea paragraphField = new TextArea();
+
+        String dynamicStyles = "-fx-control-inner-background: " + bgColor + "; -fx-text-fill: " + textColor + ";";
+        paragraphField.setStyle(dynamicStyles + Styles.PARAGRAPH_FIELD);
+
         paragraphField.setPromptText(I18nUtils.getText("enter_paragraph"));
         paragraphField.setPrefHeight(100);
         paragraphField.setPrefWidth(800);
-        paragraphField.setStyle(Styles.PARAGRAPH_FIELD);
+
         return paragraphField;
     }
+
 
     private Node createImage() {
         Button imagePlaceholder = new Button(I18nUtils.getText("select_image"));
@@ -227,11 +275,15 @@ public class WorkSpaceController {
     }
 
     private void addNewEnumerationItem(VBox enumerationBox) {
+        boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
+        String textColor = isDarkMode ? Colors.DARK_TEXT_COLOR : Colors.LIGHT_TEXT_COLOR;
+        String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
+
         HBox itemContainer = new HBox(10);
         Label dotLabel = new Label("●");
         dotLabel.setStyle(Styles.ENUMERATION_ITEM);
-
         TextField listItem = new TextField();
+        listItem.setStyle("-fx-background-color: " + bgColor + "; -fx-text-fill: " + textColor + ";");
         listItem.setPrefWidth(750);
         listItem.setPromptText(I18nUtils.getText("enter_item"));
 
@@ -249,12 +301,20 @@ public class WorkSpaceController {
     }
 
     private Node createCodeSnippet() {
+        boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
+        String textColor = isDarkMode ? Colors.DARK_TEXT_COLOR : Colors.LIGHT_TEXT_COLOR;
+        String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
+
         TextArea codeField = new TextArea();
+        codeField.setStyle("-fx-control-inner-background: " + bgColor + "; -fx-text-fill: " + textColor + ";" + Styles.CODE_SNIPPET);
+
         codeField.setPromptText(I18nUtils.getText("enter_code_snippet"));
         codeField.setPrefHeight(100);
-        codeField.setStyle(Styles.CODE_SNIPPET);
+
         return codeField;
     }
+
+
 
     private void addDraggableBehavior(Node element) {
         element.setOnDragDetected(event -> {
