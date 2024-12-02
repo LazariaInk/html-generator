@@ -1,6 +1,7 @@
 package com.pluriverse.htmlgenerator;
 
 import com.pluriverse.htmlgenerator.util.Colors;
+import com.pluriverse.htmlgenerator.util.I18nUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -13,7 +14,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
 
 public class StartController {
 
@@ -29,6 +29,7 @@ public class StartController {
     @FXML
     public void initialize() {
         colorElements();
+        reloadTexts();
     }
 
     @FXML
@@ -38,8 +39,7 @@ public class StartController {
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);
-        stage.setTitle("Settings");
-        initTextToElements();
+        stage.setTitle(I18nUtils.getText("settings"));
         stage.show();
     }
 
@@ -60,10 +60,9 @@ public class StartController {
         stage.setX((bounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((bounds.getHeight() - stage.getHeight()) / 2);
 
-        stage.setTitle("Workspace");
+        stage.setTitle(I18nUtils.getText("workspace"));
         stage.show();
     }
-
 
     public void colorElements() {
         boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
@@ -75,7 +74,9 @@ public class StartController {
         startWindow.setStyle("-fx-background-color:" + bgColor + ";");
     }
 
-    public void initTextToElements() {
-        wellComeText.setText("Welcome");
+    public void reloadTexts() {
+        wellComeText.setText(I18nUtils.getText("welcome"));
+        htmlGeneratorByLazariaInkText.setText(I18nUtils.getText("html_generator_by"));
+        mailText.setText(I18nUtils.getText("contact_email"));
     }
 }
