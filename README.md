@@ -9,21 +9,21 @@ Welcome to **HTML Generator by Lazaria Ink**! This tool is your go-to solution f
 📚 Key Features
 ---------------
 
-1.  **Responsive Design**Automatically generates responsive HTML and CSS layouts that look great on any device, be it a desktop, tablet, or smartphone.
+1.  **Responsive Design** Automatically generates responsive HTML and CSS layouts that look great on any device, be it a desktop, tablet, or smartphone.
     
-2.  **Beautiful ReadMe Creation**Perfect for generating elegant README files for GitHub or other documentation purposes.
+2.  **Beautiful ReadMe Creation** Perfect for generating elegant README files for GitHub or other documentation purposes.
     
-3.  **Code Snippets & Styling**Seamlessly add syntax-highlighted code snippets to your HTML documents.
+3.  **Code Snippets & Styling** Seamlessly add syntax-highlighted code snippets to your HTML documents.
     
-4.  **Intuitive User Interface**Built with JavaFX, the interface is modern, user-friendly, and straightforward for beginners and experts alike.
+4.  **Intuitive User Interface** Built with JavaFX, the interface is modern, user-friendly, and straightforward for beginners and experts alike.
     
-5.  **Self-Contained Package**The application package includes JavaFX SDK and JDK, ensuring easy installation and execution without additional dependencies.
+5.  **Self-Contained Package** The application package includes JavaFX SDK and JDK, ensuring easy installation and execution without additional dependencies.
     
-6.  **Executable with Launch4j**Our application is wrapped with **Launch4j**, making it a ready-to-run executable for all users.
+6.  **Executable with Launch4j** Our application is wrapped with **Launch4j**, making it a ready-to-run executable for all users.
     
-7.  **Customization Options**Fully customizable color themes, typography, and layout styles to suit your preferences.
+7.  **Customization Options** Fully customizable color themes, typography, and layout styles to suit your preferences.
     
-8.  **Support for Diverse Content**Create headings, subheadings, enumerations, images, and embedded code with responsive design principles.
+8.  **Support for Diverse Content** Create headings, subheadings, enumerations, images, and embedded code with responsive design principles.
     
 
 🎨 How It Works
