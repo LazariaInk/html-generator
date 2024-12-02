@@ -39,6 +39,7 @@ public class StartController {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("Settings");
+        initTextToElements();
         stage.show();
     }
 
@@ -72,5 +73,9 @@ public class StartController {
         mailText.setStyle("-fx-fill:" + textColor + ";");
         htmlGeneratorByLazariaInkText.setStyle("-fx-fill:" + textColor + ";");
         startWindow.setStyle("-fx-background-color:" + bgColor + ";");
+    }
+
+    public void initTextToElements() {
+        wellComeText.setText("Welcome");
     }
 }

@@ -1,8 +1,13 @@
 package com.pluriverse.htmlgenerator;
 
+import com.pluriverse.htmlgenerator.util.I18nUtils;
 import com.pluriverse.htmlgenerator.util.Styles;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,34 +17,34 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 
 public class WorkSpaceController {
 
     @FXML
     private ScrollPane scrollPane;
-
     @FXML
     private Button titleButton;
-
     @FXML
     private Button subTitleButton;
-
     @FXML
     private Button paragraphButton;
-
     @FXML
     private Button imageButton;
-
     @FXML
     private Button enumerationButton;
-
     @FXML
     private Button codeButton;
+    @FXML
+    private Button backButton;
+    @FXML
+    private Button exportButton;
 
     private VBox workArea;
-
 
     @FXML
     public void initialize() {
@@ -48,15 +53,25 @@ public class WorkSpaceController {
         workArea.setPrefHeight(1500);
         workArea.setStyle(Styles.WORK_AREA);
         scrollPane.setContent(workArea);
-
         configureDragAndDrop(titleButton, "Title");
         configureDragAndDrop(subTitleButton, "SubTitle");
         configureDragAndDrop(paragraphButton, "Paragraph");
         configureDragAndDrop(imageButton, "Image");
         configureDragAndDrop(enumerationButton, "Enumeration");
         configureDragAndDrop(codeButton, "Code");
-
         configureWorkAreaForReordering();
+        reloadTexts();
+    }
+
+    private void reloadTexts() {
+        titleButton.setText(I18nUtils.getText("enter_title"));
+        subTitleButton.setText(I18nUtils.getText("enter_subtitle"));
+        paragraphButton.setText(I18nUtils.getText("enter_paragraph"));
+        imageButton.setText(I18nUtils.getText("select_image"));
+        enumerationButton.setText(I18nUtils.getText("enter_item"));
+        codeButton.setText(I18nUtils.getText("enter_code_snippet"));
+        backButton.setText(I18nUtils.getText("back_button"));
+        exportButton.setText(I18nUtils.getText("export_button"));
     }
 
     private void configureDragAndDrop(Button button, String elementType) {
@@ -142,7 +157,6 @@ public class WorkSpaceController {
         }
     }
 
-
     private HBox wrapWithDeleteButton(Node element) {
         HBox container = new HBox(10);
         Button deleteButton = new Button("X");
@@ -156,7 +170,7 @@ public class WorkSpaceController {
     private Node createTitle() {
         TextField titleField = new TextField();
         titleField.setPrefWidth(800);
-        titleField.setPromptText("Enter title...");
+        titleField.setPromptText(I18nUtils.getText("enter_title"));
         titleField.setStyle(Styles.TITLE_FIELD);
         return titleField;
     }
@@ -164,14 +178,14 @@ public class WorkSpaceController {
     private Node createSubTitle() {
         TextField subTitleField = new TextField();
         subTitleField.setPrefWidth(800);
-        subTitleField.setPromptText("Enter subtitle...");
+        subTitleField.setPromptText(I18nUtils.getText("enter_subtitle"));
         subTitleField.setStyle(Styles.SUB_TITLE_FIELD);
         return subTitleField;
     }
 
     private Node createParagraph() {
         TextArea paragraphField = new TextArea();
-        paragraphField.setPromptText("Enter paragraph...");
+        paragraphField.setPromptText(I18nUtils.getText("enter_paragraph"));
         paragraphField.setPrefHeight(100);
         paragraphField.setPrefWidth(800);
         paragraphField.setStyle(Styles.PARAGRAPH_FIELD);
@@ -179,10 +193,10 @@ public class WorkSpaceController {
     }
 
     private Node createImage() {
-        Button imagePlaceholder = new Button("Select Image");
+        Button imagePlaceholder = new Button(I18nUtils.getText("select_image"));
         imagePlaceholder.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Select Image");
+            fileChooser.setTitle(I18nUtils.getText("select_image"));
             fileChooser.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
             );
@@ -219,7 +233,7 @@ public class WorkSpaceController {
 
         TextField listItem = new TextField();
         listItem.setPrefWidth(750);
-        listItem.setPromptText("Enter item...");
+        listItem.setPromptText(I18nUtils.getText("enter_item"));
 
         listItem.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.isEmpty()) {
@@ -230,14 +244,13 @@ public class WorkSpaceController {
         });
 
         itemContainer.getChildren().addAll(dotLabel, listItem);
-        
+
         enumerationBox.getChildren().add(itemContainer);
     }
 
-
     private Node createCodeSnippet() {
         TextArea codeField = new TextArea();
-        codeField.setPromptText("Enter code snippet...");
+        codeField.setPromptText(I18nUtils.getText("enter_code_snippet"));
         codeField.setPrefHeight(100);
         codeField.setStyle(Styles.CODE_SNIPPET);
         return codeField;
@@ -270,5 +283,22 @@ public class WorkSpaceController {
             event.setDropCompleted(true);
             event.consume();
         });
+    }
+
+    @FXML
+    public void handleStartController(javafx.event.ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/start-view.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Html generator");
+        stage.setHeight(506.0);
+        stage.setWidth(685.0);
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        stage.setX((bounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((bounds.getHeight() - stage.getHeight()) / 2);
+        stage.show();
     }
 }

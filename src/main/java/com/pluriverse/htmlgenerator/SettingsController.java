@@ -1,12 +1,15 @@
 package com.pluriverse.htmlgenerator;
 
 import com.pluriverse.htmlgenerator.util.Colors;
+import com.pluriverse.htmlgenerator.util.I18nUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -30,18 +33,23 @@ public class SettingsController {
     private Text htmlGeneratorByLazariaInkText;
     @FXML
     private Text mailText;
-
-
     @FXML
     private CheckBox darkModeCheckBox;
-
     @FXML
     private VBox settingsWindow;
+    @FXML
+    private MenuButton languageDropdown;
+    @FXML
+    private Text languageText;
 
     @FXML
     public void initialize() {
+        handleLanguageChange(Settings.get("language"));
         initDarkModeCheckBox();
         colorElements();
+        setTextToElements();
+        initLanguageDropdown();
+        reloadTexts();
     }
 
     @FXML
@@ -77,6 +85,7 @@ public class SettingsController {
         htmlGeneratorByLazariaInkText.setStyle("-fx-fill:" + textColor + ";");
         mailText.setStyle("-fx-fill:" + textColor + ";");
         settingsWindow.setStyle("-fx-background-color:" + bgColor + ";");
+        languageText.setStyle("-fx-fill:" + textColor + ";");
     }
 
     public void initDarkModeCheckBox() {
@@ -87,6 +96,39 @@ public class SettingsController {
             Settings.save();
         }
         darkModeCheckBox.setSelected(Boolean.parseBoolean(darkModeValue));
+    }
+
+    private void initLanguageDropdown() {
+        languageDropdown.setText(Settings.get("language"));
+        for (MenuItem item : languageDropdown.getItems()) {
+            item.setOnAction(event -> handleLanguageChange(item.getText()));
+        }
+    }
+
+    private void handleLanguageChange(String languageCode) {
+        languageDropdown.setText(languageCode);
+        Settings.set("language", languageCode);
+        Settings.save();
+        I18nUtils.loadLanguage();
+        reloadTexts();
+    }
+
+    private void reloadTexts() {
+        settingsText.setText(I18nUtils.getText("settings"));
+        darkModeText.setText(I18nUtils.getText("dark_mode"));
+        stylesForImageText.setText(I18nUtils.getText("styles_for_image"));
+        stylesForTextText.setText(I18nUtils.getText("styles_for_text"));
+        stylesForTitleText.setText(I18nUtils.getText("styles_for_title"));
+        stylesForSubTitle.setText(I18nUtils.getText("styles_tor_sub_title"));
+    }
+
+    public void setTextToElements() {
+        settingsText.setText("Settings");
+        darkModeText.setText("Dark mode");
+        stylesForImageText.setText("Styles for image");
+        stylesForTextText.setText("Styles for text");
+        stylesForTitleText.setText("Styles for title");
+        stylesForSubTitle.setText("Styles for sub title");
     }
 }
 
