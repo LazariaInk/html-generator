@@ -29,13 +29,13 @@ Welcome to **HTML Generator by Lazaria Ink**! This tool is your go-to solution f
 🎨 How It Works
 ---------------
 
-1.  **Install and Launch**Simply download and run the executable file included in the package. No extra setup is required!
+1.  **Install and Launch** Simply download and run the executable file included in the package. No extra setup is required!
     
-2.  **Input Your Content**Add titles, subtitles, paragraphs, code snippets, and images through the user interface.
+2.  **Input Your Content** Add titles, subtitles, paragraphs, code snippets, and images through the user interface.
     
-3.  **Generate HTML and CSS**With a single click, the application generates a complete, responsive HTML document with embedded styles.
+3.  **Generate HTML and CSS** With a single click, the application generates a complete, responsive HTML document with embedded styles.
     
-4.  **Preview and Export**Preview your work directly within the app and export it as a ready-to-use HTML file.
+4.  **Preview and Export** Preview your work directly within the app and export it as a ready-to-use HTML file.
     
 
 🛠️ Installation
