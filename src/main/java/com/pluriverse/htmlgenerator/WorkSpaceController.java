@@ -1,11 +1,9 @@
 package com.pluriverse.htmlgenerator;
 
+import com.pluriverse.htmlgenerator.util.Styles;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -48,7 +46,7 @@ public class WorkSpaceController {
         workArea = new VBox(15);
         workArea.setPrefWidth(900);
         workArea.setPrefHeight(1500);
-        workArea.setStyle("-fx-padding: 10; -fx-background-color: #f9f9f9; -fx-border-color: #cccccc;");
+        workArea.setStyle(Styles.WORK_AREA);
         scrollPane.setContent(workArea);
 
         configureDragAndDrop(titleButton, "Title");
@@ -148,21 +146,18 @@ public class WorkSpaceController {
     private HBox wrapWithDeleteButton(Node element) {
         HBox container = new HBox(10);
         Button deleteButton = new Button("X");
-        deleteButton.setStyle("-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold;");
+        deleteButton.setStyle(Styles.DELETE_BUTTON);
         deleteButton.setOnAction(event -> workArea.getChildren().remove(container));
         container.getChildren().addAll(element, deleteButton);
         addDraggableBehavior(container);
         return container;
     }
 
-
     private Node createTitle() {
         TextField titleField = new TextField();
         titleField.setPrefWidth(800);
         titleField.setPromptText("Enter title...");
-
-        titleField.setStyle("-fx-border-color: lightblue; -fx-padding: 5; -fx-font-size: 20px; -fx-font-weight: bold;");
-
+        titleField.setStyle(Styles.TITLE_FIELD);
         return titleField;
     }
 
@@ -170,8 +165,7 @@ public class WorkSpaceController {
         TextField subTitleField = new TextField();
         subTitleField.setPrefWidth(800);
         subTitleField.setPromptText("Enter subtitle...");
-        subTitleField.setStyle("-fx-border-color: lightblue; -fx-padding: 5;");
-        subTitleField.setStyle("-fx-border-color: lightblue; -fx-padding: 5; -fx-font-size: 15px; -fx-font-weight: bold;");
+        subTitleField.setStyle(Styles.SUB_TITLE_FIELD);
         return subTitleField;
     }
 
@@ -179,7 +173,8 @@ public class WorkSpaceController {
         TextArea paragraphField = new TextArea();
         paragraphField.setPromptText("Enter paragraph...");
         paragraphField.setPrefHeight(100);
-        paragraphField.setStyle("-fx-border-color: lightblue; -fx-padding: 5;");
+        paragraphField.setPrefWidth(800);
+        paragraphField.setStyle(Styles.PARAGRAPH_FIELD);
         return paragraphField;
     }
 
@@ -204,30 +199,47 @@ public class WorkSpaceController {
                 workArea.getChildren().set(index, wrappedElement);
             }
         });
-        imagePlaceholder.setStyle("-fx-border-color: lightblue; -fx-padding: 5;");
+        imagePlaceholder.setStyle(Styles.IMAGE_PLACEHOLDER);
         return imagePlaceholder;
     }
 
     private Node createEnumeration() {
         VBox enumerationBox = new VBox(5);
-        enumerationBox.setStyle("-fx-border-color: lightblue; -fx-padding: 5;");
+        enumerationBox.setStyle(Styles.ENUMERATION_BOX);
 
-        Button addButton = new Button("+ Add Item");
-        addButton.setOnAction(event -> {
-            TextField listItem = new TextField();
-            listItem.setPromptText("Enter item...");
-            enumerationBox.getChildren().add(listItem);
-        });
+        addNewEnumerationItem(enumerationBox);
 
-        enumerationBox.getChildren().add(addButton);
         return enumerationBox;
     }
+
+    private void addNewEnumerationItem(VBox enumerationBox) {
+        HBox itemContainer = new HBox(10);
+        Label dotLabel = new Label("●");
+        dotLabel.setStyle(Styles.ENUMERATION_ITEM);
+
+        TextField listItem = new TextField();
+        listItem.setPrefWidth(750);
+        listItem.setPromptText("Enter item...");
+
+        listItem.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isEmpty()) {
+                enumerationBox.getChildren().remove(itemContainer);
+            } else if (enumerationBox.getChildren().indexOf(itemContainer) == enumerationBox.getChildren().size() - 1) {
+                addNewEnumerationItem(enumerationBox);
+            }
+        });
+
+        itemContainer.getChildren().addAll(dotLabel, listItem);
+        
+        enumerationBox.getChildren().add(itemContainer);
+    }
+
 
     private Node createCodeSnippet() {
         TextArea codeField = new TextArea();
         codeField.setPromptText("Enter code snippet...");
         codeField.setPrefHeight(100);
-        codeField.setStyle("-fx-font-family: monospace; -fx-border-color: lightblue; -fx-padding: 5;");
+        codeField.setStyle(Styles.CODE_SNIPPET);
         return codeField;
     }
 
