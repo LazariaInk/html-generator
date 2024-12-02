@@ -9,33 +9,33 @@ Welcome to **HTML Generator by Lazaria Ink**! This tool is your go-to solution f
 📚 Key Features
 ---------------
 
-1.  **Responsive Design**Automatically generates responsive HTML and CSS layouts that look great on any device, be it a desktop, tablet, or smartphone.
+1.  **Responsive Design** Automatically generates responsive HTML and CSS layouts that look great on any device, be it a desktop, tablet, or smartphone.
     
-2.  **Beautiful ReadMe Creation**Perfect for generating elegant README files for GitHub or other documentation purposes.
+2.  **Beautiful ReadMe Creation** Perfect for generating elegant README files for GitHub or other documentation purposes.
     
-3.  **Code Snippets & Styling**Seamlessly add syntax-highlighted code snippets to your HTML documents.
+3.  **Code Snippets & Styling** Seamlessly add syntax-highlighted code snippets to your HTML documents.
     
-4.  **Intuitive User Interface**Built with JavaFX, the interface is modern, user-friendly, and straightforward for beginners and experts alike.
+4.  **Intuitive User Interface** Built with JavaFX, the interface is modern, user-friendly, and straightforward for beginners and experts alike.
     
-5.  **Self-Contained Package**The application package includes JavaFX SDK and JDK, ensuring easy installation and execution without additional dependencies.
+5.  **Self-Contained Package** The application package includes JavaFX SDK and JDK, ensuring easy installation and execution without additional dependencies.
     
-6.  **Executable with Launch4j**Our application is wrapped with **Launch4j**, making it a ready-to-run executable for all users.
+6.  **Executable with Launch4j** Our application is wrapped with **Launch4j**, making it a ready-to-run executable for all users.
     
-7.  **Customization Options**Fully customizable color themes, typography, and layout styles to suit your preferences.
+7.  **Customization Options** Fully customizable color themes, typography, and layout styles to suit your preferences.
     
-8.  **Support for Diverse Content**Create headings, subheadings, enumerations, images, and embedded code with responsive design principles.
+8.  **Support for Diverse Content** Create headings, subheadings, enumerations, images, and embedded code with responsive design principles.
     
 
 🎨 How It Works
 ---------------
 
-1.  **Install and Launch**Simply download and run the executable file included in the package. No extra setup is required!
+1.  **Install and Launch** Simply download and run the executable file included in the package. No extra setup is required!
     
-2.  **Input Your Content**Add titles, subtitles, paragraphs, code snippets, and images through the user interface.
+2.  **Input Your Content** Add titles, subtitles, paragraphs, code snippets, and images through the user interface.
     
-3.  **Generate HTML and CSS**With a single click, the application generates a complete, responsive HTML document with embedded styles.
+3.  **Generate HTML and CSS** With a single click, the application generates a complete, responsive HTML document with embedded styles.
     
-4.  **Preview and Export**Preview your work directly within the app and export it as a ready-to-use HTML file.
+4.  **Preview and Export** Preview your work directly within the app and export it as a ready-to-use HTML file.
     
 
 🛠️ Installation
