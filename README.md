@@ -61,7 +61,8 @@ Welcome to **HTML Generator by Lazaria Ink**! This tool is your go-to solution f
 
 Here's a sample of the generated HTML content:
 
-test 
+![exportss](https://github.com/user-attachments/assets/ddb60547-b961-486c-8d7f-5e0420c73907)
+
 
 🧩 Requirements
 ---------------
