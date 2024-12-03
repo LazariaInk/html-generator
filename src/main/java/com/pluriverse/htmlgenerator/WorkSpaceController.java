@@ -2,6 +2,7 @@ package com.pluriverse.htmlgenerator;
 
 import com.pluriverse.htmlgenerator.util.Colors;
 import com.pluriverse.htmlgenerator.util.I18nUtils;
+import com.pluriverse.htmlgenerator.util.ProjectConstants;
 import com.pluriverse.htmlgenerator.util.Styles;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,7 +56,7 @@ public class WorkSpaceController {
     public void initialize() {
         workArea = new VBox(15);
         workArea.setPrefWidth(900);
-        workArea.setPrefHeight(1500);
+        workArea.setPrefHeight(700);
         workArea.setStyle(Styles.WORK_AREA);
         scrollPane.setContent(workArea);
 
@@ -151,6 +152,8 @@ public class WorkSpaceController {
 
     private void addElementToWorkArea(String elementType, double dropY) {
         Node newElement = null;
+        double oldWorkAreaHeight = workArea.getHeight();
+        workArea.setPrefHeight(oldWorkAreaHeight + 150);
         switch (elementType) {
             case "Title":
                 newElement = createTitle();
@@ -449,13 +452,7 @@ public class WorkSpaceController {
             Files.write(htmlFile, htmlContent.toString().getBytes());
 
             Path cssFile = new File(exportFolder, "styles.css").toPath();
-            String cssContent = ".document-container { font-family: Arial, sans-serif; margin: 20px; }\n" +
-                    ".main-title { font-size: 2em; color: #333; }\n" +
-                    ".subtitle { font-size: 1.5em; color: #555; }\n" +
-                    ".paragraph { font-size: 1em; line-height: 1.5; color: #666; }\n" +
-                    ".code-inline { background: #f4f4f4; padding: 10px; border-radius: 5px; }\n" +
-                    ".responsive-image { max-width: 100%; height: auto; }\n";
-            Files.write(cssFile, cssContent.getBytes());
+            Files.write(cssFile, ProjectConstants.DEFAULT_CSS.getBytes());
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Export Successful");
