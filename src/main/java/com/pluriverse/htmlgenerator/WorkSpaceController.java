@@ -17,12 +17,13 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
+import javafx.stage.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 
 public class WorkSpaceController {
@@ -74,17 +75,17 @@ public class WorkSpaceController {
         boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
         String textColor = isDarkMode ? Colors.DARK_TEXT_COLOR : Colors.LIGHT_TEXT_COLOR;
         String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
-        titleButton.setStyle(Styles.TEXT_FILL_STYLE_KEY + textColor + ";");
-        subTitleButton.setStyle(Styles.TEXT_FILL_STYLE_KEY + textColor + ";");
-        paragraphButton.setStyle(Styles.TEXT_FILL_STYLE_KEY + textColor + ";");
-        imageButton.setStyle(Styles.TEXT_FILL_STYLE_KEY + textColor + ";");
-        enumerationButton.setStyle(Styles.TEXT_FILL_STYLE_KEY + textColor + ";");
-        codeButton.setStyle(Styles.TEXT_FILL_STYLE_KEY + textColor + ";");
-        backButton.setStyle(Styles.TEXT_FILL_STYLE_KEY + textColor + ";");
-        exportButton.setStyle(Styles.TEXT_FILL_STYLE_KEY + textColor + ";");
-        workAreaContainer.setStyle(Styles.TEXT_FILL_STYLE_KEY + bgColor + ";");
-        scrollPane.setStyle(Styles.TEXT_FILL_STYLE_KEY + bgColor + ";");
-        workArea.setStyle(Styles.TEXT_FILL_STYLE_KEY + bgColor + ";");
+        titleButton.setStyle("-fx-text-fill: " + textColor + ";");
+        subTitleButton.setStyle("-fx-text-fill: " + textColor + ";");
+        paragraphButton.setStyle("-fx-text-fill: " + textColor + ";");
+        imageButton.setStyle("-fx-text-fill: " + textColor + ";");
+        enumerationButton.setStyle("-fx-text-fill: " + textColor + ";");
+        codeButton.setStyle("-fx-text-fill: " + textColor + ";");
+        backButton.setStyle("-fx-text-fill: " + textColor + ";");
+        exportButton.setStyle("-fx-text-fill: " + textColor + ";");
+        workAreaContainer.setStyle("-fx-background-color: " + bgColor + ";");
+        scrollPane.setStyle("-fx-background: " + bgColor + ";");
+        workArea.setStyle("-fx-background: " + bgColor + ";");
     }
 
     private void reloadTexts() {
@@ -218,6 +219,7 @@ public class WorkSpaceController {
         String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
 
         TextArea paragraphField = new TextArea();
+        paragraphField.setUserData("paragraph");
 
         String dynamicStyles = "-fx-control-inner-background: " + bgColor + "; -fx-text-fill: " + textColor + ";";
         paragraphField.setStyle(dynamicStyles + Styles.PARAGRAPH_FIELD);
@@ -300,6 +302,7 @@ public class WorkSpaceController {
         String textColor = isDarkMode ? Colors.DARK_TEXT_COLOR : Colors.LIGHT_TEXT_COLOR;
         String bgColor = isDarkMode ? Colors.DARK_BG_COLOR : Colors.LIGHT_BG_COLOR;
         TextArea codeField = new TextArea();
+        codeField.setUserData("codeSnippet");
         codeField.setStyle("-fx-control-inner-background: " + bgColor + "; -fx-text-fill: " + textColor + ";" + Styles.CODE_SNIPPET);
         codeField.setPromptText(I18nUtils.getText("enter_code_snippet"));
         codeField.setPrefHeight(100);
@@ -351,4 +354,123 @@ public class WorkSpaceController {
         stage.setY((bounds.getHeight() - stage.getHeight()) / 2);
         stage.show();
     }
+
+    @FXML
+    public void exportToHtml() {
+        try {
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            directoryChooser.setTitle("Select Export Folder");
+
+            Window window = scrollPane.getScene().getWindow();
+            File selectedDirectory = directoryChooser.showDialog(window);
+
+            if (selectedDirectory == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Export Canceled");
+                alert.setHeaderText(null);
+                alert.setContentText("No folder selected. Export operation canceled.");
+                alert.showAndWait();
+                return;
+            }
+
+            File exportFolder = new File(selectedDirectory, "export");
+            if (!exportFolder.exists()) {
+                exportFolder.mkdir();
+            }
+            File imagesFolder = new File(exportFolder, "images");
+            if (!imagesFolder.exists()) {
+                imagesFolder.mkdir();
+            }
+
+            StringBuilder htmlContent = new StringBuilder();
+            htmlContent.append("<!DOCTYPE html>\n")
+                    .append("<html lang=\"en\">\n")
+                    .append("<head>\n")
+                    .append("    <meta charset=\"UTF-8\">\n")
+                    .append("    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n")
+                    .append("    <title>Document</title>\n")
+                    .append("    <link rel=\"stylesheet\" href=\"styles.css\">\n")
+                    .append("</head>\n")
+                    .append("<body>\n")
+                    .append("    <div class=\"document-container\">\n");
+
+            int imageCounter = 1;
+
+            for (Node node : workArea.getChildren()) {
+                if (node instanceof HBox) {
+                    HBox container = (HBox) node;
+                    Node content = container.getChildren().get(0);
+
+                    if (content instanceof TextField) {
+                        TextField titleField = (TextField) content;
+                        if (titleField.getPromptText().equals(I18nUtils.getText("enter_title"))) {
+                            htmlContent.append("<h1 class=\"main-title\">")
+                                    .append(titleField.getText())
+                                    .append("</h1>\n");
+                        } else if (titleField.getPromptText().equals(I18nUtils.getText("enter_subtitle"))) {
+                            htmlContent.append("<h2 class=\"subtitle\">")
+                                    .append(titleField.getText())
+                                    .append("</h2>\n");
+                        }
+                    } else if (content instanceof TextArea) {
+                        TextArea textArea = (TextArea) content;
+                        Object userData = textArea.getUserData();
+
+                        if ("paragraph".equals(userData)) {
+                            htmlContent.append("<p class=\"paragraph\">")
+                                    .append(textArea.getText())
+                                    .append("</p>\n");
+                        } else if ("codeSnippet".equals(userData)) {
+                            htmlContent.append("<div class=\"code-inline\"><pre><code>")
+                                    .append(textArea.getText())
+                                    .append("</code></pre></div>\n");
+                        }
+                    } else if (content instanceof ImageView) {
+                        ImageView imageView = (ImageView) content;
+                        String imagePath = imageView.getImage().getUrl();
+                        File sourceFile = new File(imagePath.replace("file:", ""));
+                        File destFile = new File(imagesFolder, "image" + imageCounter++ + ".png");
+                        Files.copy(sourceFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+                        htmlContent.append("<div class=\"image-container\">\n")
+                                .append("<img src=\"images/")
+                                .append(destFile.getName())
+                                .append("\" alt=\"\" class=\"responsive-image\">\n")
+                                .append("</div>\n");
+                    }
+                }
+            }
+
+            htmlContent.append("    </div>\n")
+                    .append("</body>\n")
+                    .append("</html>");
+
+            Path htmlFile = new File(exportFolder, "index.html").toPath();
+            Files.write(htmlFile, htmlContent.toString().getBytes());
+
+            Path cssFile = new File(exportFolder, "styles.css").toPath();
+            String cssContent = ".document-container { font-family: Arial, sans-serif; margin: 20px; }\n" +
+                    ".main-title { font-size: 2em; color: #333; }\n" +
+                    ".subtitle { font-size: 1.5em; color: #555; }\n" +
+                    ".paragraph { font-size: 1em; line-height: 1.5; color: #666; }\n" +
+                    ".code-inline { background: #f4f4f4; padding: 10px; border-radius: 5px; }\n" +
+                    ".responsive-image { max-width: 100%; height: auto; }\n";
+            Files.write(cssFile, cssContent.getBytes());
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Export Successful");
+            alert.setHeaderText(null);
+            alert.setContentText("The document has been exported successfully to:\n" + exportFolder.getAbsolutePath());
+            alert.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Export Failed");
+            alert.setHeaderText(null);
+            alert.setContentText("An error occurred while exporting the document.");
+            alert.showAndWait();
+        }
+    }
+
+
 }

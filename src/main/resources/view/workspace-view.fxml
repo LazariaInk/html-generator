@@ -82,7 +82,6 @@
             </HBox>
         </VBox>
     </HBox>
-    <!-- Bottom Bar -->
     <HBox prefHeight="89.0" prefWidth="1091.0">
         <Pane prefHeight="73.0" prefWidth="35.0"/>
         <VBox prefHeight="90.0" prefWidth="202.0">
@@ -96,7 +95,7 @@
                     </graphic>
                 </Button>
                 <Pane prefHeight="42.0" prefWidth="25.0"/>
-                <Button fx:id="exportButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="50"  style="-fx-border-color: transparent; -fx-background-color: transparent;" textFill="WHITE">
+                <Button fx:id="exportButton" onMouseClicked="#exportToHtml" mnemonicParsing="false" prefHeight="25.0" prefWidth="50"  style="-fx-border-color: transparent; -fx-background-color: transparent;" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="43.0" preserveRatio="true">
                             <Image url="@images/export.png" />
