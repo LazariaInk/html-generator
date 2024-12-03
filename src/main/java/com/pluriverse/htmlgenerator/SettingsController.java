@@ -30,10 +30,6 @@ public class SettingsController {
     @FXML
     private Text stylesForSubTitle;
     @FXML
-    private Text htmlGeneratorByLazariaInkText;
-    @FXML
-    private Text mailText;
-    @FXML
     private CheckBox darkModeCheckBox;
     @FXML
     private VBox settingsWindow;
@@ -41,10 +37,15 @@ public class SettingsController {
     private MenuButton languageDropdown;
     @FXML
     private Text languageText;
+    @FXML
+    private MenuButton exportTypeDropdown;
+    @FXML
+    private Text exportTypeText;
 
     @FXML
     public void initialize() {
         handleLanguageChange(Settings.get("language"));
+        initExportTypeDropdown();
         initDarkModeCheckBox();
         colorElements();
         setTextToElements();
@@ -82,10 +83,9 @@ public class SettingsController {
         stylesForImageText.setStyle("-fx-fill:" + textColor + ";");
         stylesForTitleText.setStyle("-fx-fill:" + textColor + ";");
         stylesForSubTitle.setStyle("-fx-fill:" + textColor + ";");
-        htmlGeneratorByLazariaInkText.setStyle("-fx-fill:" + textColor + ";");
-        mailText.setStyle("-fx-fill:" + textColor + ";");
         settingsWindow.setStyle("-fx-background-color:" + bgColor + ";");
         languageText.setStyle("-fx-fill:" + textColor + ";");
+        exportTypeText.setStyle("-fx-fill:" + textColor + ";");
     }
 
     public void initDarkModeCheckBox() {
@@ -105,12 +105,25 @@ public class SettingsController {
         }
     }
 
+    private void initExportTypeDropdown() {
+        exportTypeDropdown.setText(Settings.get("exportType"));
+        for (MenuItem item : exportTypeDropdown.getItems()) {
+            item.setOnAction(event -> handleExportTypeChange(item.getText()));
+        }
+    }
+
     private void handleLanguageChange(String languageCode) {
         languageDropdown.setText(languageCode);
         Settings.set("language", languageCode);
         Settings.save();
         I18nUtils.loadLanguage();
         reloadTexts();
+    }
+
+    private void handleExportTypeChange(String exportType) {
+        exportTypeDropdown.setText(exportType);
+        Settings.set("exportType", exportType);
+        Settings.save();
     }
 
     private void reloadTexts() {
@@ -120,6 +133,7 @@ public class SettingsController {
         stylesForTextText.setText(I18nUtils.getText("styles_for_text"));
         stylesForTitleText.setText(I18nUtils.getText("styles_for_title"));
         stylesForSubTitle.setText(I18nUtils.getText("styles_tor_sub_title"));
+        exportTypeText.setText(I18nUtils.getText("export_type"));
     }
 
     public void setTextToElements() {

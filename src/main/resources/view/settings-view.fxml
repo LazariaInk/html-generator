@@ -82,7 +82,22 @@
                 </HBox>
                 <HBox prefHeight="50.0" prefWidth="645.0">
                     <Pane prefHeight="200.0" prefWidth="25.0" />
-                    <Text fx:id="languageText" fill="#f5f3f3" strokeType="OUTSIDE" text="Language   " wrappingWidth="100">
+                    <Text fx:id="exportTypeText" fill="#f5f3f3" strokeType="OUTSIDE" text="Language   " wrappingWidth="180.0">
+                        <font>
+                            <Font size="20.0" />
+                        </font>
+                    </Text>
+                    <MenuButton fx:id="exportTypeDropdown" mnemonicParsing="false" text="MenuButton">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="html" />
+                            <MenuItem mnemonicParsing="false" text="pdf" />
+                            <MenuItem mnemonicParsing="false" text="markdown" />
+                        </items>
+                    </MenuButton>
+                </HBox>
+                <HBox prefHeight="50.0" prefWidth="645.0">
+                    <Pane prefHeight="200.0" prefWidth="25.0" />
+                    <Text fx:id="languageText" fill="#f5f3f3" strokeType="OUTSIDE" text="Language   " wrappingWidth="180.0">
                         <font>
                             <Font size="20.0" />
                         </font>
