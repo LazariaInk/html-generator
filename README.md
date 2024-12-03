@@ -53,9 +53,8 @@ Welcome to **HTML Generator by Lazaria Ink**! This tool is your go-to solution f
 🖼️ Screenshots
 ---------------
 
-_User-friendly interface for generating stunning HTML content._
+![htmlgeneratorss](https://github.com/user-attachments/assets/e99cf256-fa2d-4dd6-a629-771486dcf059)
 
-_Preview your responsive design before exporting._
 
 📜 Example Output
 -----------------
