@@ -10,5 +10,6 @@ public class Styles {
     public final static String ENUMERATION_BOX = "-fx-border-color: lightblue; -fx-padding: 5;";
     public final static String ENUMERATION_ITEM = "-fx-font-size: 18px; -fx-text-fill: black;";
     public final static String CODE_SNIPPET = "-fx-font-family: monospace; -fx-border-color: lightblue; -fx-padding: 5;";
+    public final static String TEXT_FILL_STYLE_KEY =  "-fx-text-fill: ";
 
 }
