@@ -421,11 +421,11 @@ public class WorkSpaceController {
 
                         if ("paragraph".equals(userData)) {
                             htmlContent.append("<p class=\"paragraph\">")
-                                    .append(textArea.getText())
+                                    .append(escapeHtml(textArea.getText()))
                                     .append("</p>\n");
                         } else if ("codeSnippet".equals(userData)) {
                             htmlContent.append("<div class=\"code-inline\"><pre><code>")
-                                    .append(textArea.getText())
+                                    .append(escapeHtmlPreserveWhitespace(textArea.getText()))
                                     .append("</code></pre></div>\n");
                         }
                     } else if (content instanceof ImageView) {
@@ -468,6 +468,26 @@ public class WorkSpaceController {
             alert.showAndWait();
         }
     }
+
+    private String escapeHtml(String text) {
+        return text.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#x27;");
+    }
+
+    private String escapeHtmlPreserveWhitespace(String text) {
+        return text.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#x27;")
+                .replace("\t", "&#x9;") // Preserve tabs
+                .replace(" ", "&nbsp;") // Preserve spaces
+                .replace("\n", "<br>"); // Preserve newlines
+    }
+
 
 
 }

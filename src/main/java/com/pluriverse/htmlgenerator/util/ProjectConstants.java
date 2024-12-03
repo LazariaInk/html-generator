@@ -1,4 +1,4 @@
-﻿package com.pluriverse.htmlgenerator.util;
+package com.pluriverse.htmlgenerator.util;
 
 public class ProjectConstants {
 
