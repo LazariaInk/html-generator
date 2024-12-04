@@ -41,7 +41,7 @@ Welcome to **HTML Generator by Lazaria Ink**! This tool is your go-to solution f
 🛠️ Installation
 ----------------
 
-1.  Download the latest release from [Releases](https://github.com/yourusername/html-generator/releases).
+1.  Download the latest release from [Releases]([https://github.com/yourusername/html-generator/releases](https://github.com/LazariaInk/html-generator/releases/tag/v1.0.0)).
     
 2.  Extract the downloaded package.
     
