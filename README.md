@@ -86,11 +86,6 @@ We’re here to help you succeed in your documentation journey!
 
 We welcome contributions from the community! If you'd like to contribute, please fork the repository and submit a pull request. For any major changes, please open an issue first to discuss your ideas.
 
-🛡️ License
------------
-
-This project is licensed under the **MIT License**. See the LICENSE file for more details.
-
 ### 🌟 Thank you for using HTML Generator by Lazaria Ink!
 
 Happy coding, and may your documentation always be beautiful! 😊
