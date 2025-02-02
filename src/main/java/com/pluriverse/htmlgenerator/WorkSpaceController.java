@@ -22,6 +22,7 @@ import javafx.stage.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -431,7 +432,8 @@ public class WorkSpaceController {
                     } else if (content instanceof ImageView) {
                         ImageView imageView = (ImageView) content;
                         String imagePath = imageView.getImage().getUrl();
-                        File sourceFile = new File(imagePath.replace("file:", ""));
+                        String decodedPath = java.net.URLDecoder.decode(imagePath.replace("file:", ""), StandardCharsets.UTF_8);
+                        File sourceFile = new File(decodedPath);
                         File destFile = new File(imagesFolder, "image" + imageCounter++ + ".png");
                         Files.copy(sourceFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
@@ -483,11 +485,10 @@ public class WorkSpaceController {
                 .replace(">", "&gt;")
                 .replace("\"", "&quot;")
                 .replace("'", "&#x27;")
-                .replace("\t", "&#x9;") // Preserve tabs
-                .replace(" ", "&nbsp;") // Preserve spaces
-                .replace("\n", "<br>"); // Preserve newlines
+                .replace("\t", "&#x9;")
+                .replace(" ", "&nbsp;")
+                .replace("\n", "<br>");
     }
-
 
 
 }
