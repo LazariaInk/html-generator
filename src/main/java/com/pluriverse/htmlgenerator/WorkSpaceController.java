@@ -393,7 +393,6 @@ public class WorkSpaceController {
                     .append("    <meta charset=\"UTF-8\">\n")
                     .append("    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n")
                     .append("    <title>Document</title>\n")
-                    .append("    <link rel=\"stylesheet\" href=\"styles.css\">\n")
                     .append("</head>\n")
                     .append("<body>\n")
                     .append("    <div class=\"document-container\">\n");
@@ -442,9 +441,28 @@ public class WorkSpaceController {
                                 .append(destFile.getName())
                                 .append("\" alt=\"\" class=\"responsive-image\">\n")
                                 .append("</div>\n");
+                    } else if (content instanceof VBox) {
+                        VBox enumerationBox = (VBox) content;
+                        htmlContent.append("<ul class=\"enumeration\">\n");
+
+                        for (Node item : enumerationBox.getChildren()) {
+                            if (item instanceof HBox) {
+                                HBox itemContainer = (HBox) item;
+                                Node listItemNode = itemContainer.getChildren().get(1);  // Second element is the text field
+                                if (listItemNode instanceof TextField) {
+                                    TextField listItem = (TextField) listItemNode;
+                                    if (!listItem.getText().isEmpty()) {
+                                        htmlContent.append("<li>").append(escapeHtml(listItem.getText())).append("</li>\n");
+                                    }
+                                }
+                            }
+                        }
+
+                        htmlContent.append("</ul>\n");
                     }
                 }
             }
+
 
             htmlContent.append("    </div>\n")
                     .append("</body>\n")
