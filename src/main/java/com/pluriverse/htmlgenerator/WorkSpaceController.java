@@ -50,6 +50,9 @@ public class WorkSpaceController {
     private Button exportButton;
     @FXML
     private VBox workAreaContainer;
+    @FXML
+    private Button clearAllButton;
+
 
     private VBox workArea;
 
@@ -72,6 +75,12 @@ public class WorkSpaceController {
         reloadTexts();
         colorElements();
     }
+
+    @FXML
+    private void clearAllElements() {
+        workArea.getChildren().clear();
+    }
+
 
     private void colorElements() {
         boolean isDarkMode = Boolean.parseBoolean(Settings.get("darkMode"));
@@ -433,7 +442,7 @@ public class WorkSpaceController {
                         String imagePath = imageView.getImage().getUrl();
                         String decodedPath = java.net.URLDecoder.decode(imagePath.replace("file:", ""), StandardCharsets.UTF_8);
                         File sourceFile = new File(decodedPath);
-                        File destFile = new File(imagesFolder, "image" + imageCounter++ + ".png");
+                        File destFile = new File(imagesFolder, sourceFile.getName());
                         Files.copy(sourceFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
                         htmlContent.append("<div class=\"image-container\">\n")
@@ -448,7 +457,7 @@ public class WorkSpaceController {
                         for (Node item : enumerationBox.getChildren()) {
                             if (item instanceof HBox) {
                                 HBox itemContainer = (HBox) item;
-                                Node listItemNode = itemContainer.getChildren().get(1);  // Second element is the text field
+                                Node listItemNode = itemContainer.getChildren().get(1);
                                 if (listItemNode instanceof TextField) {
                                     TextField listItem = (TextField) listItemNode;
                                     if (!listItem.getText().isEmpty()) {

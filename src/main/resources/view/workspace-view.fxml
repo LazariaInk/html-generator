@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.2" fx:controller="com.pluriverse.htmlgenerator.WorkSpaceController" fx:id="workAreaContainer">
+<VBox fx:id="workAreaContainer" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pluriverse.htmlgenerator.WorkSpaceController">
     <!-- Main Content -->
     <HBox prefHeight="775.0" prefWidth="1091.0">
         <ScrollPane fx:id="scrollPane" prefHeight="775.0" prefWidth="982.0" />
@@ -83,27 +83,32 @@
         </VBox>
     </HBox>
     <HBox prefHeight="89.0" prefWidth="1091.0">
-        <Pane prefHeight="73.0" prefWidth="35.0"/>
+        <Pane prefHeight="73.0" prefWidth="35.0" />
         <VBox prefHeight="90.0" prefWidth="202.0">
-            <Pane prefHeight="22.0" prefWidth="166.0"/>
+            <Pane prefHeight="22.0" prefWidth="166.0" />
             <HBox prefHeight="42.0" prefWidth="184.0">
-                <Button onAction="#handleStartController" fx:id="backButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="50"  style="-fx-border-color: transparent; -fx-background-color: transparent;" textFill="WHITE">
+                <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleStartController" prefHeight="25.0" prefWidth="50" style="-fx-border-color: transparent; -fx-background-color: transparent;" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="43.0" preserveRatio="true">
                             <Image url="@images/back-button.png" />
                         </ImageView>
                     </graphic>
                 </Button>
-                <Pane prefHeight="42.0" prefWidth="25.0"/>
-                <Button fx:id="exportButton" onMouseClicked="#exportToHtml" mnemonicParsing="false" prefHeight="25.0" prefWidth="50"  style="-fx-border-color: transparent; -fx-background-color: transparent;" textFill="WHITE">
+                <Pane prefHeight="42.0" prefWidth="25.0" />
+                <Button fx:id="exportButton" mnemonicParsing="false" onMouseClicked="#exportToHtml" prefHeight="25.0" prefWidth="50" style="-fx-border-color: transparent; -fx-background-color: transparent;" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="43.0" preserveRatio="true">
                             <Image url="@images/export.png" />
                         </ImageView>
                     </graphic>
                 </Button>
+                <Button fx:id="clearAllButton" mnemonicParsing="false" onMouseClicked="#clearAllElements" prefHeight="40.0" prefWidth="90.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" text="clear" textFill="#b94343">
+               <font>
+                  <Font size="17.0" />
+               </font>
+                </Button>
             </HBox>
-            <Pane prefHeight="20.0" prefWidth="202.0"/>
+            <Pane prefHeight="20.0" prefWidth="202.0" />
         </VBox>
     </HBox>
 </VBox>
